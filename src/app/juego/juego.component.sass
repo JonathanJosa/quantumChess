@@ -1,0 +1,381 @@
+@import url("https://fonts.googleapis.com/css?family=Modak")
+@import url("https://fonts.googleapis.com/css?family=Montserrat")
+$caballo: url('https://firebasestorage.googleapis.com/v0/b/goals-jonathan-vazquez.appspot.com/o/caballo.png?alt=media&token=0a895f1b-114e-475e-8048-6ed4d296be40')
+$alfil: url('https://firebasestorage.googleapis.com/v0/b/goals-jonathan-vazquez.appspot.com/o/alfil.webp?alt=media&token=6edd6272-f911-42bd-bea3-88ad8bf17657')
+$peon: url('https://firebasestorage.googleapis.com/v0/b/goals-jonathan-vazquez.appspot.com/o/peon.png?alt=media&token=b9d7df54-bd00-4e0c-a6bb-9082cbde5703')
+$rey: url('https://firebasestorage.googleapis.com/v0/b/goals-jonathan-vazquez.appspot.com/o/rey.png?alt=media&token=c63082f8-8ac4-4ae7-bb4a-393a2c0aa812')
+$reyna: url('https://firebasestorage.googleapis.com/v0/b/goals-jonathan-vazquez.appspot.com/o/reyna.png?alt=media&token=aed34179-6fff-43a1-af4e-b85902ae293f')
+$torre: url('https://firebasestorage.googleapis.com/v0/b/goals-jonathan-vazquez.appspot.com/o/torre.png?alt=media&token=9247ba65-aa70-43f4-a809-c0373ed0bf48')
+$display: block
+
+:host
+  --turno: 0deg
+
+@function neon($numero, $color)
+  $var: '0 0 0px #{ $color }'
+  @for $i from 1 through $numero
+    $var: ' #{ $var }, 0 0 #{ $i*6 }px #{ $color }'
+  @for $i from 1 through $numero
+    $var: ' #{ $var }, inset 0 0 #{ $i*6 }px #{ $color }'
+  @return unquote($var)
+
+.pantalla
+  position: absolute
+  width: 100%
+  height: 100%
+  background-color:  #141515
+  align-items: center
+  top: 0
+  left: 0
+  animation-name: carga
+  animation-duration: 1s
+  animation-timing-function: linear
+  animation-fill-mode: none
+  display: none
+  opacity: 1
+  .carga
+    width: 70px
+    height: 70px
+    border-radius: 50%
+    border: 15px solid
+    border-color: #00ff87 #00422357
+    animation: 1s girar 1
+
+@keyframes girar
+  to
+    transform: rotate(360deg)
+
+@keyframes carga
+  0%
+    display: block
+    opacity: 1
+  80%
+    opacity: 1
+  95%
+    opacity: 0
+  100%
+    $display: none
+
+
+
+
+.campeon
+  position: absolute
+  top: 0
+  left: 0
+  background-color: rgba(#141515, 1)
+  width: 98vw
+  height: 98vh
+  transition: 5s
+  overflow: hidden
+  box-sizing: border-box
+  p
+    position: absolute
+    top: 50%
+    left: 50%
+    font-family: "Montserrat", sans-serif
+    font-size: calc(15 * 1vmin)
+    font-weight: bold
+    text-transform: uppercase
+    letter-spacing: 1px
+    text-align: center
+    transform: translate(-50%, -50%)
+    background-color: white
+    background-image: url(https://media.giphy.com/media/26BROrSHlmyzzHf3i/giphy.gif)
+    background-size: cover
+    color: transparent
+    -moz-background-clip: text
+    -webkit-background-clip: text
+
+
+
+.coronar
+  position: absolute
+  top: 0
+  left: 0
+  background-color: rgba(#141515, 0.8)
+  width: 100vw
+  height: 100vh
+  .contenedor
+    position: relative
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    width: 70%
+    height: min(20vh, 20vw)
+    display: grid
+    grid-template-columns: repeat(4, 1fr)
+    grid-column-gap: 10px
+    background-color: transparent
+    border-radius: 1em
+    border-bottom: 3px solid rgba(white, 0.5)
+    filter: drop-shadow(0 0 3px white) invert(60%) brightness(140%)
+    p
+      position: absolute
+      font-family: sans-serif
+      font-size: calc(10 * 1vmin)
+      text-align: center
+      width: 100%
+      transform: translate(0, -110%)
+      color: rgba(black, 1)
+    button
+      position: relative
+      top: 10%
+      left: 10%
+      width: 80%
+      height: 80%
+      background-color: transparent
+      background-position: center
+      background-repeat: no-repeat
+      background-size: contain
+      transform: scale(0.7)
+      filter: drop-shadow(0 0 5px white) invert(60%) brightness(50%)
+      transition: 0.4s
+      &:hover
+        transform: scale(1.2)
+      &.torre
+        background-image: $torre
+      &.alfil
+        background-image: $alfil
+      &.reyna
+        background-image: $reyna
+      &.caballo
+        background-image: $caballo
+
+
+.juego
+  height: min(90vh, 90vw)
+  width: min(90vh, 90vw)
+  margin: min(5vh, 5vw) auto 0 auto
+  background-color: rgba(#fff, 0.02)
+  position: relative
+  .user
+    color: #fff
+    position: absolute
+    bottom: 0
+    font-size: 15px
+    font-weight: bold
+    text-transform: uppercase
+    text-shadow: 0 0 5px rgba(0,178,255,1), 0 0 10px rgba(0,178,255,1), 0 0 20px rgba(0,178,255,1), 0 0 40px rgba(38,104,127,1), 0 0 80px rgba(38,104,127,1)
+  .tablero
+    transition: 0.3s
+    transition-delay: 0.2s
+    transform: rotate(var(--turno))
+    width: min(80vh, 80vw)
+    height: min(80vh, 80vw)
+    position: absolute
+    margin-left: min(5vh, 5vw)
+    margin-top: min(5vh, 5vw)
+    background-color: lighten(#141515, 1%)
+    display: grid
+    grid-template-columns: repeat(8, 1fr)
+    grid-template-rows: repeat(8, 1fr)
+    .casilla
+      width: 100%
+      height: 100%
+      position: relative
+      transition-delay: 0.2s
+      transform: rotate(var(--turno))
+      .seleccionado
+        width: 100%
+        height: 100%
+        background-color: rgba(white, 0.1)
+        position: absolute
+        index: -1
+      .circulo
+        position: relative
+        background-position: center
+        background-repeat: no-repeat
+        background-size: contain
+        width: 80%
+        height: 80%
+        top: 10%
+        left: 10%
+        filter: drop-shadow(0px 0px 6px #F50000) invert(100%)  saturate(10000%)
+        &[title].cuantico:hover::before
+          content: attr(title)
+          position: relative
+          top: -25%
+          left: 125%
+          border-radius: 10%
+          background-image: url()
+          background-color: black
+          color: white
+          padding: 10px
+          font-weight: 100
+          font-size: 1.1em
+          animation: none
+        &:hover
+          transform: scale(1.05)
+        &:active
+          transform: scale(1.2)
+        &.libre
+          width: 5%
+          height: 5%
+          top: 47.5%
+          left: 47.5%
+          box-shadow: neon(10, '#fff')
+          background-color: #fff
+          border-radius: 100%
+          filter: drop-shadow(0 0 0 white) invert(60%)
+        &.peon
+          width: 60%
+          height: 60%
+          top: 20%
+          left: 20%
+          background-image: $peon
+        &.torre
+          background-image: $torre
+        &.caballo
+          width: 70%
+          height: 70%
+          top: 15%
+          left: 15%
+          background-image: $caballo
+        &.alfil
+          background-image: $alfil
+        &.reyna
+          background-image: $reyna
+        &.rey
+          background-image: $rey
+        &.false
+          filter: drop-shadow(0px 0px 6px blue) invert(100%) saturate(10000%)
+        &.cuantico
+          animation: glitch-a 6s infinite alternate
+          position: relative
+          &::after
+            content: ""
+            position: absolute
+            width: 100%
+            height: 20%
+            left: 0
+            top: 0
+            background-image: url('https://thumbs.gfycat.com/AgilePeacefulAegeancat-small.gif')
+            background-position: center
+            background-repeat: no-repeat
+            background-size: cover
+            animation: glitch-b 1.7s infinite alternate-reverse
+            opacity: 0
+          &::before
+            content: ""
+            position: absolute
+            width: 100%
+            height: 10%
+            left: 0
+            top: 60%
+            background-image: url('https://thumbs.gfycat.com/AgilePeacefulAegeancat-small.gif')
+            background-position: center
+            background-repeat: no-repeat
+            background-size: cover
+            animation: glitch-b 1.7s infinite alternate-reverse
+
+
+@keyframes glitch-a
+  17%
+    transform: scale(0.91)
+  41%
+    transform: scale(1.1)
+  57%
+    transform: scale(1.3)
+  77%
+    transform: scale(0.91)
+  97%
+    transform: scale(1)
+
+@keyframes glitch-b
+  0%
+    opacity: 0.5
+    left: -10%
+    transform: scale(1.1)
+  2%
+    opacity: 0.5
+    left: 0%
+    transform: scale(1)
+  3%
+    opacity: 1
+    height: 5%
+    left: 10%
+    transform: scale(1.2)
+  5%
+    opacity: 0
+    height: 20%
+    left: 0
+    top: 0
+    transform: scale(1)
+  50%
+    opacity: 0
+    top: 0
+    left: 0
+    transform: scale(1)
+  53%
+    opacity: 0.8
+    left: -10%
+    top: 10%
+    height: 20%
+    transform: scale(1.2)
+  55%
+    opacity: 0.5
+    left: 20%
+    top: 20%
+    height: 5%
+    transform: scale(1)
+  57%
+    opacity: 0
+    left: 0
+    top: 0
+    height: 20%
+    transform: scale(1)
+
+
+@keyframes glitch-c
+  0%
+    opacity: 0.5
+    left: -10%
+    transform: scale(1.1)
+  2%
+    opacity: 0.5
+    left: 0%
+    transform: scale(1)
+  3%
+    opacity: 1
+    height: 5%
+    left: 10%
+    transform: scale(1.2)
+  5%
+    opacity: 0
+    height: 20%
+    left: 0
+    top: 60%
+    transform: scale(1)
+  50%
+    opacity: 0
+    top: 60%
+    left: 0
+    transform: scale(1)
+  53%
+    opacity: 0.8
+    left: -10%
+    top: 70%
+    height: 20%
+    transform: scale(1.2)
+  55%
+    opacity: 0.5
+    left: 20%
+    top: 80%
+    height: 5%
+    transform: scale(1)
+  57%
+    opacity: 0
+    left: 0
+    top: 60%
+    height: 20%
+    transform: scale(1)
+
+
+@keyframes rotar
+  0%
+    transform: rotate(0deg)
+  50%
+    transform: rotate(180deg)
+  100%
+    transform: rotate(360deg)

@@ -1,0 +1,16 @@
+<div class="contenedor">
+  <div class="titulo">
+    Ajedrez <span>Cuantico</span> <p>by <a href="https://jonathanjosa.github.io./">JonathanJosa</a></p>
+  </div>
+  <button type="button" name="button" routerLink="chess/QC/local/847">Juego local</button>
+  <button type="button" name="button" (click)="buscar()">Multijugador</button>
+  <button type="button" name="button" (click)="crearLink()">Contra Amigo</button>
+  <button type="button" name="button" (click)="showReglas()">Reglas</button>
+</div>
+<div *ngIf="multiplayer" class="buscando">
+  <div class="carga"></div>
+  Buscando rival....
+</div>
+<div *ngIf="reglas" class="reglas">
+  Las reglas son simples
+</div>

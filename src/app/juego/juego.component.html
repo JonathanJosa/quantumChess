@@ -1,0 +1,51 @@
+<div class="juego">
+  <div class="user"></div>
+  <div class="tablero">
+    <div *ngFor="let i of arreglo; let num = index;" class="casilla no{{num}}"  (click)="normal(num)" (contextmenu)="cuantico(num)">
+        <div *ngIf="i.seleccionado" class="seleccionado"></div>
+        <div class="circulo {{i.clase}}" title="1/{{i.posibilidad}}"></div>
+    </div>
+  </div>
+</div>
+<div *ngIf="coronar" class="coronar">
+  <div class="contenedor">
+    <p class="texto">Corona a tu peon!!!</p>
+    <button type="button" class="reyna" (click)="coronarP('reyna')"></button>
+    <button type="button" class="torre" (click)="coronarP('torre')"></button>
+    <button type="button" class="alfil" (click)="coronarP('alfil')"></button>
+    <button type="button" class="caballo" (click)="coronarP('caballo')"></button>
+  </div>
+</div>
+<div *ngIf="endGame" class="campeon" (click)="regresar()">
+  <div class="nombre">
+    <p>Felicidades {{champion}}</p>
+  </div>
+</div>
+
+<!--
+1 => 3,
+2 => 1,
+3 => 4,
+4 => 2,
+5 <>,
+6 => 4,
+7 => 4,
+8 => 4,
+9 <>,
+10 => 4,
+11 <>,
+12 => 4,
+13 => 4,
+14 => 4,
+15 => 4,
+16 => 3,
+17 => 4,
+18 => 4,
+19 => 4,
+20 => 4,
+21 => 4,
+22 => 4,
+23 => 4,
+24 => 2,
+25 => 2,
+ -->

@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "chess-11847"
+  },
+  "targets": {
+    "chess-11847": {
+      "hosting": {
+        "chess": [
+          "chess-11847"
+        ]
+      }
+    }
+  }
+}
